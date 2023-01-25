@@ -1,0 +1,89 @@
+<div class="container">
+    <form
+      [formGroup]="examForm"
+      *ngIf="examForm"
+      (ngSubmit)="saveExam()">
+        <div class="row">
+          <h2 class="p-4 text-center">{{ "COMMON.FORM" | translate : { componentName: 'Exam'} }}</h2>
+            <div class="col-4">
+                <label for="examPeriod" class="col-form-label">{{
+                "EXAM.EXAM_PERIOD" | translate
+                }}</label>
+            </div>
+            <div class="col">
+                <select class="form-select" formControlName="examPeriod">
+                  <option *ngFor="let examPeriod of examPeriods" [ngValue]="examPeriod">{{examPeriod.name}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="alert alert-danger row" *ngIf="hasErrors('examPeriod')">
+            <span *ngIf="hasErrors('examPeriod', 'required')">
+              <small>{{ "VALIDATION_MESSAGES.REQUIRED" | translate : { componentName: 'Exam period'} }}</small>
+            </span>
+          </div>
+        <div class="row mt-2">
+            <div class="col-4">
+                <label for="subject" class="col-form-label">{{
+                "EXAM.SUBJECT" | translate
+                }}</label>
+            </div>
+            <div class="col">
+                <select class="form-select" formControlName="subject" (change)="getProfessors()">
+                  <option *ngFor="let subject of subjects" [ngValue]="subject">{{subject.name}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="alert alert-danger row" *ngIf="hasErrors('subject')">
+            <span *ngIf="hasErrors('subject', 'required')">
+              <small>{{ "VALIDATION_MESSAGES.REQUIRED" | translate : { componentName: 'Subject'} }}</small>
+            </span>
+          </div>
+        <div class="row mt-2">
+            <div class="col-4">
+                <label for="professor" class="col-form-label">{{
+                "EXAM.PROFESSOR" | translate
+                }}</label>
+            </div>
+            <div class="col">
+                <select class="form-select" formControlName="professor">
+                  <option *ngFor="let professor of professors" [ngValue]="professor">{{professor.firstName + ' ' + professor.lastName }}</option>
+                </select>
+            </div>
+        </div>
+        <div class="alert alert-danger row" *ngIf="hasErrors('professor')">
+            <span *ngIf="hasErrors('professor', 'required')">
+              <small>{{ "VALIDATION_MESSAGES.REQUIRED" | translate : { componentName: 'Professor'} }}</small>
+            </span>
+          </div>
+        <div class="row mt-2">
+            <div class="col-4">
+                <label for="date" class="col-form-label">{{
+                "EXAM.EXAM_DATE" | translate
+                }}</label>
+            </div>
+            <div class="col">
+                <input
+                    type="date"
+                    class="form-control"
+                    formControlName="date"
+                />
+            </div>
+        </div>
+        <div class="alert alert-danger row" *ngIf="hasErrors('date')">
+            <span *ngIf="hasErrors('date', 'required')">
+              <small>{{ "VALIDATION_MESSAGES.REQUIRED" | translate : { componentName: 'Exam date'} }}</small>
+            </span>
+          </div>
+      <div class="row mt-2">
+        <div class="col-md-12 text-center">
+          <button class="btn btn-outline-dark col-sm-2 m-2" type="submit" [disabled]="examForm.invalid">
+            {{ "COMMON.SAVE" | translate }}
+          </button>
+          <button class="btn btn-outline-secondary col-sm-2 m-2" (click)="onCancel()">
+            {{ "COMMON.CANCEL" | translate }}
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+  

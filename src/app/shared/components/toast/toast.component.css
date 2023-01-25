@@ -1,0 +1,26 @@
+.toast-container {
+    position: fixed;
+    top: 1rem;
+    right: 1.5rem;
+    display: grid;
+    justify-items: end;
+    gap: .5rem;
+    z-index: 1;
+}
+
+ngb-toast {
+    animation: toast 3000ms cubic-bezier(0.075, 0.82, 0.165, 1) forwards;
+}
+
+@keyframes toast {
+    0%,
+    100% {
+        transform: translateY(-150%);
+        opacity: 0;
+    }
+    10%,
+    90% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}

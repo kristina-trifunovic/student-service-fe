@@ -1,0 +1,282 @@
+<div class="container">
+    <form
+      [formGroup]="professorForm"
+      *ngIf="professorForm"
+      (ngSubmit)="saveProfessor()"
+    >
+    <div class="row mt-2">
+      <h2 class="p-4 text-center">{{ "COMMON.FORM" | translate : { componentName: 'Professor'} }}</h2>
+      <div class="col-4">
+        <label for="firstName" class="col-form-label">Username</label>
+      </div>
+      <div class="col">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Enter username"
+          formControlName="username"
+        />
+      </div>
+    </div>
+    <div class="alert alert-danger row" *ngIf="hasErrors('username')">
+      <span *ngIf="hasErrors('username', 'required')">
+        <small>{{ "VALIDATION_MESSAGES.REQUIRED" | translate : { componentName: 'Username' } }}</small>
+      </span>
+    </div>
+    <div class="row mt-2">
+      <div class="col-4">
+        <label for="password" class="col-form-label">Password</label>
+      </div>
+      <div class="col">
+        <input
+          type="password"
+          class="form-control"
+          placeholder="Enter password"
+          formControlName="password"
+        />
+      </div>
+    </div>
+    <div class="alert alert-danger row" *ngIf="hasErrors('password')">
+      <span *ngIf="hasErrors('password', 'required')">
+        <small>{{ "VALIDATION_MESSAGES.REQUIRED" | translate : { componentName: 'Password' } }}</small>
+      </span>
+    </div>
+      <div class="row mt-2">
+        <div class="col-4">
+          <label for="firstName" class="col-form-label">{{
+            "PROFESSOR.FIRST_NAME" | translate
+          }}</label>
+        </div>
+        <div class="col">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Enter first name"
+            formControlName="firstName"
+          />
+        </div>
+      </div>
+      <div class="alert alert-danger row" *ngIf="hasErrors('firstName')">
+        <span *ngIf="hasErrors('firstName', 'required')">
+          <small>{{ "VALIDATION_MESSAGES.REQUIRED" | translate : { componentName: 'First name'} }}</small>
+        </span>
+        <span *ngIf="hasErrors('firstName', 'minlength')">
+          <small>{{ "VALIDATION_MESSAGES.MIN_LENGTH" | 
+            translate : {
+              minLength: (professorForm.get("firstName")?.errors)!["minlength"]['requiredLength'],
+              componentName: 'First name'
+            } }}</small>
+        </span>
+        <span *ngIf="hasErrors('firstName', 'maxlength')">
+          <small>{{ "VALIDATION_MESSAGES.MAX_LENGTH" | 
+            translate : {
+              maxLength: (professorForm.get("firstName")?.errors)!["maxlength"]['requiredLength'],
+              componentName: 'First name'
+            } }}</small>
+        </span>
+      </div>
+      <div class="row mt-2">
+        <div class="col-4">
+          <label for="LastName" class="col-form-label">{{
+            "PROFESSOR.LAST_NAME" | translate
+          }}</label>
+        </div>
+        <div class="col">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Enter last name"
+            formControlName="lastName"
+          />
+        </div>
+      </div>
+      <div class="alert alert-danger row" *ngIf="hasErrors('lastName')">
+        <span *ngIf="hasErrors('lastName', 'required')">
+          <small>{{ "VALIDATION_MESSAGES.REQUIRED" | translate : { componentName: 'Last name'} }}</small>
+        </span>
+        <span *ngIf="hasErrors('lastName', 'minlength')">
+          <small>{{ "VALIDATION_MESSAGES.MIN_LENGTH" | 
+            translate : {
+              minLength: (professorForm.get("lastName")?.errors)!["minlength"]['requiredLength'],
+              componentName: 'Last name'
+            } }}</small>
+        </span>
+        <span *ngIf="hasErrors('lastName', 'maxlength')">
+          <small>{{ "VALIDATION_MESSAGES.MAX_LENGTH" | 
+            translate : {
+              maxLength: (professorForm.get("lastName")?.errors)!["maxlength"]['requiredLength'],
+              componentName: 'Last name'
+            } }}</small>
+        </span>
+      </div>
+      <div class="row mt-2">
+          <div class="col-4">
+              <label for="email" class="col-form-label">{{
+              "PROFESSOR.EMAIL" | translate
+              }}</label>
+          </div>
+          <div class="col">
+              <input
+                  type="email"
+                  class="form-control"
+                  placeholder="Enter email name"
+                  formControlName="email"
+              />
+          </div>
+      </div>
+      <div class="alert alert-danger row" *ngIf="hasErrors('email')">
+        <span>
+          <small>{{ "VALIDATION_MESSAGES.EMAIL" | translate }}</small>
+        </span>
+        <span *ngIf="hasErrors('email', 'required')">
+          <small>{{ "VALIDATION_MESSAGES.REQUIRED" | translate : { componentName: 'Email'} }}</small>
+        </span>
+      </div>
+      <div class="row mt-2">
+          <div class="col-4">
+              <label for="address" class="col-form-label">{{
+              "PROFESSOR.ADDRESS" | translate
+              }}</label>
+          </div>
+          <div class="col">
+              <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Enter address"
+                  formControlName="address"
+              />
+          </div>
+      </div>
+      <div class="alert alert-danger row" *ngIf="hasErrors('address')">
+        <span *ngIf="hasErrors('address', 'minlength')">
+          <small>{{ "VALIDATION_MESSAGES.MIN_LENGTH"
+             | translate : 
+              {
+                minLength: (professorForm.get("address")?.errors)!["minlength"]['requiredLength'],
+                componentName: 'Address'
+              } }}</small>
+        </span>
+        <span *ngIf="hasErrors('address', 'maxlength')">
+          <small>{{ "VALIDATION_MESSAGES.MAX_LENGTH"
+             | translate : 
+              {
+                maxLength: (professorForm.get("address")?.errors)!["maxlength"]['requiredLength'],
+                componentName: 'Address'
+              } }}</small>
+        </span>
+      </div>
+      <div class="row mt-2">
+          <div class="col-4">
+              <label for="city" class="col-form-label">{{
+              "PROFESSOR.CITY" | translate
+              }}</label>
+          </div>
+          <div class="col">
+            <select class="form-select" formControlName="city"  [compareWith]="compareCity">
+              <option *ngFor="let city of cities" [ngValue]="city">{{city.name}}</option>
+            </select>
+          </div>
+      </div>
+      <div class="row mt-2">
+          <div class="col-7">
+              <label for="phone" class="col-form-label">{{
+              "PROFESSOR.PHONE" | translate
+              }}</label>
+          </div>
+          <div class="col">
+              <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Enter phone"
+                  formControlName="phone"
+              />
+          </div>
+      </div>
+      <div class="alert alert-danger row" *ngIf="hasErrors('phone')">
+        <span *ngIf="hasErrors('phone', 'minlength')">
+          <small>{{ "VALIDATION_MESSAGES.MIN_LENGTH"
+             | translate : 
+              {
+                minLength: (professorForm.get("phone")?.errors)!["minlength"]['requiredLength'],
+                componentName: 'Phone'
+              } }}</small>
+        </span>
+        <span *ngIf="hasErrors('phone', 'maxlength')">
+          <small>{{ "VALIDATION_MESSAGES.MAX_LENGTH"
+             | translate : 
+              {
+                maxLength: (professorForm.get("phone")?.errors)!["maxlength"]['requiredLength'],
+                componentName: 'Phone'
+              } }}</small>
+        </span>
+        <span *ngIf="hasErrors('phone', 'pattern')">
+          <small>{{
+            "VALIDATION_MESSAGES.PATTERN"
+              | translate: { componentName: 'Phone' }
+          }}</small>
+        </span>
+      </div>
+      <div class="row mt-2">
+        <div class="col-7">
+            <label for="reelection_date" class="col-form-label">{{
+            "PROFESSOR.REELECTION_DATE" | translate
+            }}</label>
+        </div>
+        <div class="col">
+            <input
+                type="date"
+                class="form-control"
+                formControlName="reelectionDate"
+            />
+        </div>
+    </div>
+    <div class="alert alert-danger row" *ngIf="hasErrors('reelectionDate')">
+      <span *ngIf="hasErrors('reelectionDate', 'required')">
+        <small>{{ "VALIDATION_MESSAGES.REQUIRED" | translate : { componentName: 'Reelection date' } }}</small>
+      </span>
+    </div>
+    <div class="row mt-2">
+        <div class="col-4">
+            <label for="title" class="col-form-label">{{
+            "PROFESSOR.TITLE" | translate
+            }}</label>
+        </div>
+        <div class="col">
+          <select class="form-select" formControlName="title" [compareWith]="compareTitle">
+            <option *ngFor="let title of titles" [ngValue]="title">{{title.professorTitle}}</option>
+          </select>
+        </div>
+    </div>
+    <div class="alert alert-danger row" *ngIf="hasErrors('title')">
+      <span *ngIf="hasErrors('title', 'required')">
+        <small>{{ "VALIDATION_MESSAGES.REQUIRED" | translate : { componentName: 'Title' } }}</small>
+      </span>
+    </div>
+    <div class="row mt-2">
+        <div class="col-4">
+            <label for="subjects" class="col-form-label">{{
+            "PROFESSOR.SUBJECTS" | translate
+            }}</label>
+            <div class="row">
+              <small class="form-text text-muted">Hold Ctrl and choose subjects</small>
+            </div>
+        </div>
+        <div class="col">
+          <select class="form-select" formControlName="subjects" multiple [compareWith]="compareSubject">
+            <option *ngFor="let subject of subjects" [ngValue]="subject">{{subject.name}}</option>
+          </select>
+        </div>
+    </div>
+      <div class="row mt-2">
+        <div class="col-md-12 text-center">
+          <button class="btn btn-outline-dark col-sm-2 m-2" type="submit" [disabled]="professorForm.invalid">
+            {{ "COMMON.SAVE" | translate }}
+          </button>
+          <button class="btn btn-outline-secondary col-sm-2 m-2" (click)="onCancel()">
+            {{ "COMMON.CANCEL" | translate }}
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+  

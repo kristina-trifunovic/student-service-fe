@@ -1,0 +1,11 @@
+.dropdown > button {
+    width: 100% !important;
+}
+
+.dropdown-toggle {
+    text-align: center;
+}
+
+.dropdown > .dropdown-tex-end {
+    text-align: center;
+}

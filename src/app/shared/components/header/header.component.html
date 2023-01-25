@@ -1,0 +1,88 @@
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <div ngbDropdown class="d-inline-block">
+                <button type="button" class="btn btn-outline-secondary my-4" ngbDropdownToggle>Menu</button>
+                <div ngbDropdownMenu>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col">
+                                <div ngbDropdown>
+                                    <button type="button" class="btn btn-outline-primary mt-2" id="dropdownCity" ngbDropdownToggle>Cities</button>
+                                    <div ngbDropdownMenu class="dropdown-tex-end" aria-labelledby="dropdownCity">
+                                        <button routerLink="/city" class="btn btn-outline-secondary btn-sm" ngbDropdownItem>Go to cities</button>
+                                        <button routerLink="/city/form" class="btn btn-outline-secondary btn-sm" ngbDropdownItem>Add city</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div ngbDropdown>
+                                    <button type="button" class="btn btn-outline-primary mt-2" id="dropdownStudent" ngbDropdownToggle>Students</button>
+                                    <div ngbDropdownMenu class="dropdown-tex-end" aria-labelledby="dropdownStudent">
+                                        <button routerLink="/student" class="btn btn-outline-secondary btn-sm" ngbDropdownItem>Go to students</button>
+                                        <button routerLink="/student/form" class="btn btn-outline-secondary btn-sm" ngbDropdownItem>Add student</button>
+                                        <button routerLink="/student/apply" class="btn btn-outline-secondary btn-sm" ngbDropdownItem>Apply exams</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div ngbDropdown>
+                                    <button type="button" class="btn btn-outline-primary mt-2" id="dropdownSubject" ngbDropdownToggle>Subjects</button>
+                                    <div ngbDropdownMenu class="dropdown-tex-end" aria-labelledby="dropdownSubject">
+                                        <button routerLink="/subject" class="btn btn-outline-secondary btn-sm" ngbDropdownItem>Go to subjects</button>
+                                        <button routerLink="/subject/form" class="btn btn-outline-secondary btn-sm" ngbDropdownItem>Add subject</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div ngbDropdown>
+                                    <button type="button" class="btn btn-outline-primary mt-2" id="dropdownProfessor" ngbDropdownToggle>Professors</button>
+                                    <div ngbDropdownMenu class="dropdown-tex-end" aria-labelledby="dropdownProfessor">
+                                        <button routerLink="/professor" class="btn btn-outline-secondary btn-sm" ngbDropdownItem>Go to professors</button>
+                                        <button routerLink="/professor/form" class="btn btn-outline-secondary btn-sm" ngbDropdownItem>Add professor</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div ngbDropdown>
+                                    <button type="button" class="btn btn-outline-primary mt-2" id="dropdownExam" ngbDropdownToggle>Exams</button>
+                                    <div ngbDropdownMenu class="dropdown-tex-end" aria-labelledby="dropdownExam">
+                                        <button routerLink="/exam" class="btn btn-outline-secondary btn-sm" ngbDropdownItem>Go to exams</button>
+                                        <button routerLink="/exam/form" class="btn btn-outline-secondary btn-sm" ngbDropdownItem>Add exam</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div ngbDropdown>
+                                    <button type="button" class="btn btn-outline-primary mt-2" id="dropdownExamPeriod" ngbDropdownToggle>Exam periods</button>
+                                    <div ngbDropdownMenu class="dropdown-tex-end" aria-labelledby="dropdownExamPeriod">
+                                        <button routerLink="/exam-period/form" class="btn btn-outline-secondary btn-sm" ngbDropdownItem>Add exam period</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col" *ngIf="userLoginData.userLoggedIn">
+            <div ngbDropdown class="d-inline-block">
+                <button type="button" class="btn btn-outline-dark my-4" ngbDropdownToggle>{{ userLoginData.userLoggedIn.firstName + ' ' + userLoginData.userLoggedIn.lastName }}</button>
+                <div ngbDropdownMenu>
+                    <button ngbDropdownItem *ngIf="showHomeButton()" routerLink="/home">Homepage</button>
+                    <button ngbDropdownItem (click)="logout()">Logout</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,121 @@
+<div class="container">
+    <form
+      [formGroup]="examPeriodForm"
+      *ngIf="examPeriodForm"
+      (ngSubmit)="saveExamPeriod()"
+    >
+      <div class="row">
+        <h2 class="p-4 text-center">{{ "COMMON.FORM" | translate : { componentName: 'Exam period'} }}</h2>
+        <div class="col-4">
+          <label for="id" class="col-form-label">{{
+            "EXAM_PERIOD.ID" | translate
+          }}</label>
+        </div>
+        <div class="col">
+          <div class="input-group">
+            <input
+              type="text"
+              class="form-control"
+              placeholder="ID"
+              formControlName="id"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="alert alert-danger row" *ngIf="hasErrors('id')">
+        <span *ngIf="hasErrors('id', 'required')">
+          <small>{{ "VALIDATION_MESSAGES.REQUIRED" | translate : { componentName: 'ID'} }}</small>
+        </span>
+      </div>
+      
+      <div class="row mt-2">
+        <div class="col-4">
+          <label for="name" class="col-form-label">{{
+            "EXAM_PERIOD.NAME" | translate
+          }}</label>
+        </div>
+        <div class="col">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Enter name"
+            formControlName="name"
+          />
+        </div>
+      </div>
+      <div class="alert alert-danger row" *ngIf="hasErrors('name')">
+        <span *ngIf="hasErrors('name', 'required')">
+          <small>{{ "VALIDATION_MESSAGES.REQUIRED" | translate : { componentName: 'Name' } }}</small>
+        </span>
+        <span *ngIf="hasErrors('name', 'maxlength')">
+          <small>{{ "VALIDATION_MESSAGES.MAX_LENGTH" | translate : { maxLength: (examPeriodForm.get("name")?.errors)!["maxlength"]['requiredLength'] , componentName: 'Name'} }}</small>
+        </span>
+      </div>
+      <div class="row mt-2">
+        <div class="col-4">
+            <label for="start_date" class="col-form-label">{{
+            "EXAM_PERIOD.START_DATE" | translate
+            }}</label>
+        </div>
+        <div class="col">
+            <input
+                type="date"
+                class="form-control"
+                formControlName="startDate"
+            />
+        </div>
+    </div>
+    <div class="alert alert-danger row" *ngIf="hasErrors('startDate')">
+      <span *ngIf="hasErrors('startDate', 'required')">
+        <small>{{ "VALIDATION_MESSAGES.REQUIRED" | translate : { componentName: 'Start date'} }}</small>
+      </span>
+    </div>
+    <div class="row mt-2">
+        <div class="col-4">
+            <label for="end_date" class="col-form-label">{{
+            "EXAM_PERIOD.END_DATE" | translate
+            }}</label>
+        </div>
+        <div class="col">
+            <input
+                type="date"
+                class="form-control"
+                formControlName="endDate"
+            />
+        </div>
+    </div>
+    <div class="alert alert-danger row" *ngIf="hasErrors('endDate')">
+      <span *ngIf="hasErrors('endDate', 'required')">
+        <small>{{ "VALIDATION_MESSAGES.REQUIRED" | translate : { componentName: 'End date'} }}</small>
+      </span>
+    </div>
+    <div class="row mt-2">
+        <div class="col-7">
+            <label for="active" class="col-form-label">{{
+            "EXAM_PERIOD.ACTIVE" | translate
+            }}</label>
+        </div>
+        <div class="col">
+            <select formControlName="isActive" class="form-select">
+                <option *ngFor="let option of activeOptions | keyvalue" [ngValue]="option.value">{{ option.value }}</option>
+            </select>
+        </div>
+    </div>
+    <div class="alert alert-danger row" *ngIf="hasErrors('isActive')">
+      <span *ngIf="hasErrors('isActive', 'required')">
+        <small>{{ "VALIDATION_MESSAGES.REQUIRED" | translate : { componentName: 'Active'} }}</small>
+      </span>
+    </div>
+    <div class="row mt-2">
+        <div class="col-md-12 text-center">
+            <button class="btn btn-outline-dark col-sm-2 m-2" type="submit" [disabled]="examPeriodForm.invalid">
+            {{ "COMMON.SAVE" | translate }}
+            </button>
+            <button class="btn btn-outline-secondary col-sm-2 m-2" (click)="onCancel()">
+            {{ "COMMON.CANCEL" | translate }}
+            </button>
+        </div>
+    </div>
+    </form>
+</div>
+  

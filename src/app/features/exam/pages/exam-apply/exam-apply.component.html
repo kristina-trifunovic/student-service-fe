@@ -1,0 +1,38 @@
+<div class="container">
+    <form
+      [formGroup]="examsForm"
+      *ngIf="examsForm"
+      (ngSubmit)="applyExams()">
+        <div class="row">
+          <h2 class="p-4 text-center">{{ "COMMON.APPLY" | translate }}</h2>
+            <div class="col-4">
+                <label for="exams" class="col-form-label">{{
+                "STUDENT.EXAMS" | translate
+                }}</label>
+                <div class="row">
+                  <small class="form-text text-muted">Hold Ctrl and choose exams</small>
+                </div>
+            </div>
+            <div class="col-6">
+                <select class="form-select" formControlName="exams" multiple>
+                  <option *ngFor="let exam of exams" [ngValue]="exam">{{exam.subject.name + ' - ' + exam.examPeriod.name}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="alert alert-danger row" *ngIf="hasErrors('exams')">
+            <span *ngIf="hasErrors('exams', 'required')">
+              <small>{{ "VALIDATION_MESSAGES.REQUIRED" | translate : { componentName: 'Exam'} }}</small>
+            </span>
+        </div>
+        <div class="row mt-2">
+            <div class="col-md-12 text-center">
+              <button class="btn btn-outline-dark col-sm-4 m-2" type="submit" [disabled]="examsForm.invalid">
+                {{ "COMMON.APPLY" | translate }}
+              </button>
+              <button class="btn btn-outline-secondary col-sm-4 m-2" (click)="onCancel()">
+                {{ "COMMON.CANCEL" | translate }}
+              </button>
+            </div>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,143 @@
+
+<ng-template #details let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Student details</h4>
+      <button type="button" class="btn-close" (click)="modal.dismiss()"></button>
+    </div>
+    <div class="modal-body">
+        <div class="container">
+            <div class="row">
+                <div class="col-3">
+                    <label for="index" class="col-form-label">{{ 'STUDENT.INDEX' | translate }}</label>
+                </div>
+                <div class="col">
+                    <input type="text" class="form-control" readonly value="{{studentToShow!.index.indexNumber + '/' + studentToShow!.index.indexYear}}">
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-3">
+                    <label for="name" class="col-form-label">{{ 'STUDENT.FULLNAME' | translate }}</label>
+                </div>
+                <div class="col">
+                    <input type="text" class="form-control" readonly value="{{studentToShow!.firstName + ' ' + studentToShow!.lastName}}">
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-3">
+                    <label for="email" class="col-form-label">{{ 'STUDENT.EMAIL' | translate }}</label>
+                </div>
+                <div class="col">
+                    <input type="email" class="form-control" readonly [value]="studentToShow!.email">
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-3">
+                    <label for="city" class="col-form-label">{{ 'STUDENT.CITY' | translate }}</label>
+                </div>
+                <div class="col">
+                    <input type="text" class="form-control" readonly [value]="studentToShow!.city.name">
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-3">
+                    <label for="address" class="col-form-label">{{ 'STUDENT.ADDRESS' | translate }}</label>
+                </div>
+                <div class="col">
+                    <input type="text" class="form-control" readonly [value]="studentToShow!.address">
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-5">
+                    <label for="email" class="col-form-label">{{ 'STUDENT.CURRENT_YEAR_OF_STUDY' | translate }}</label>
+                </div>
+                <div class="col">
+                    <input type="text" class="form-control" readonly [value]="studentToShow!.currentYearOfStudy">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        
+    </div>
+</ng-template>
+
+<div class="row justify-content-center mx-auto">
+    <h2 class="p-4 text-center">{{ "COMMON.LIST" | translate : { componentName: 'Student'} }}</h2>
+    <div class="col-8">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">{{ 'STUDENT.INDEX' | translate }}</th>
+                    <th sortable="firstName" (sort)="onSort($event)" scope="col">{{ 'STUDENT.FIRST_NAME' | translate }}</th>
+                    <th sortable="lastName" (sort)="onSort($event)" scope="col">{{ 'STUDENT.LAST_NAME' | translate }}</th>
+                    <th scope="col">{{ 'STUDENT.EMAIL' | translate }}</th>
+                    <th sortable="cityName" (sort)="onSort($event)" scope="col">{{ 'STUDENT.CITY' | translate }}</th>
+                    <th scope="col">{{ 'COMMON.ACTIONS' | translate }}</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td></td>
+                    <td>
+                        <div class="d-flex align-items-center">
+                            <input type="text" class="form-control input-under-btn" [(ngModel)]="filterInfo.firstName">
+                            <button class="btn-close btn-over-input" (click)="removeFirstNameInput()"></button>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="d-flex align-items-center">
+                            <input type="text" class="form-control input-under-btn" [(ngModel)]="filterInfo.lastName">
+                            <button class="btn-close btn-over-input" (click)="removeLastNameInput()"></button>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="d-flex align-items-center">
+                            <input type="text" class="form-control input-under-btn" [(ngModel)]="filterInfo.email">
+                            <button class="btn-close btn-over-input" (click)="removeEmailInput()"></button>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="d-flex align-items-center">
+                            <input type="text" class="form-control input-under-btn" [(ngModel)]="filterInfo.city">
+                            <button class="btn-close btn-over-input" (click)="removeCityInput()"></button>
+                        </div>
+                    </td>
+                    <td class="d-flex flex-nowrap justify-content-center">
+                        <button class="btn btn-outline-secondary m-1" (click)="loadStudents()"><!--{{ 'COMMON.FILTER' | translate }}--><bi name="funnel"></bi></button>
+                        <button class="btn btn-outline-danger m-1" (click)="rollbackFilter()" [disabled]=""><!--{{ 'COMMON.CANCEL' | translate }}--><bi name="x-lg"></bi></button>
+                    </td>
+                </tr>
+                <tr *ngFor="let student of students">
+                    <td>{{ student.index.indexNumber + '/' + student.index.indexYear }}</td>
+                    <td>{{ student.firstName }}</td>
+                    <td>{{ student.lastName }}</td>
+                    <td>{{ student.email }}</td>
+                    <td>{{ student.city.name }}</td>
+                    <td class="d-flex flex-nowrap">
+                        <button class="btn btn-outline-dark m-1" (click)="onEditStudent(student.username)"><!--{{ 'COMMON.EDIT' | translate }}--><bi name="pencil"></bi></button>
+                        <button class="btn btn-outline-danger m-1" (click)="onDelete(student)"><!--{{ 'COMMON.DELETE' | translate }}--><bi name="trash"></bi></button>
+                        <button class="btn btn-outline-secondary m-1" (click)="openDetails(details, student)"><!--{{ 'COMMON.DETAILS' | translate }}--><bi name="info-lg"></bi></button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="d-flex flex-column justify-content-center align-items-center">
+    <ngb-pagination
+          [pageSize]="pageInfo.pageSize"
+          [collectionSize]="pageInfo.totalItems"
+          [(page)]="pageInfo.pageNo"
+          (pageChange)="onPageChange()"
+          [boundaryLinks]="true">
+    </ngb-pagination>
+    <div class="d-flex justify-content-center align-items-center">
+        <label for="pageSize">Show</label>
+        <select class="form-select small mx-2 col-2"
+            (change)="onPageSizeChange()"
+            [(ngModel)]="pageInfo.pageSize" >
+            <option *ngFor="let size of availablePageSizes" [ngValue]="size">{{size}}</option>
+        </select>
+        <label for="pageSize">per page</label>
+    </div>
+</div>

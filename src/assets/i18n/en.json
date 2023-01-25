@@ -1,0 +1,89 @@
+{
+  "APP_TITLE": "Student service",
+  "COMMON": {
+    "LIST": "{{componentName}} list",
+    "FORM": "{{componentName}} form",
+    "ACTIONS" : "Actions",
+    "ADD_LITERATURE": "Add literature",
+    "UPLOAD": "Upload",
+    "EDIT": "Edit",
+    "DETAILS": "Details",
+    "CANCEL" : "Cancel",
+    "SAVE": "Save",
+    "DELETE": "Delete",
+    "DELETE_CONFIRM_DIALOG": {
+      "TITLE": "Deleting {{entityName}}",
+      "MESSAGE": "Are you sure you want to delete {{objectDetails}}?"
+    },
+    "APPLY": "Apply",
+    "FILTER": "Filter"
+  },
+  "USER": {
+    "FULL_NAME": "Full Name",
+    "EMAIL": "Email",
+    "ADDRESS": "Address"
+  },
+  "CITY": {
+    "POSTAL_CODE": "Postal Code",
+    "NAME" : "Name",
+    "DELETE" : {
+      "TITLE": "Deleting city"
+    }
+  },
+  "STUDENT": {
+    "INDEX": "Index",
+    "FIRST_NAME": "First Name",
+    "LAST_NAME": "Last Name",
+    "FULLNAME": "Name",
+    "EMAIL": "Email",
+    "ADDRESS": "Address",
+    "CITY": "City",
+    "CURRENT_YEAR_OF_STUDY": "Current Year Of Study",
+    "APPLIED_EXAMS": "Applied Exams",
+    "EXAMS": "Exams"
+  },
+  "SUBJECT": {
+    "ID": "#",
+    "NAME": "Name",
+    "DESCRIPTION": "Description",
+    "NO_OF_ESP": "ESP",
+    "YEAR_OF_STUDY": "Year Of Study",
+    "SEMESTER": "Semester"
+  },
+  "PROFESSOR": {
+    "ID": "#",
+    "FIRST_NAME": "First Name",
+    "LAST_NAME":"Last Name",
+    "NAME": "Name",
+    "EMAIL": "Email",
+    "ADDRESS": "Address",
+    "CITY": "City",
+    "PHONE": "Phone",
+    "REELECTION_DATE": "Reelection Date",
+    "TITLE": "Title",
+    "SUBJECTS": "Subjects"
+  },
+  "EXAM_PERIOD": {
+    "ID": "#",
+    "NAME": "Name",
+    "START_DATE": "Start Date",
+    "END_DATE": "End Date",
+    "ACTIVE": "Active"
+  },
+  "EXAM": {
+    "EXAM_PERIOD": "Exam Period",
+    "SUBJECT": "Subject",
+    "PROFESSOR": "Professor",
+    "GRADE": "Grade",
+    "EXAM_DATE": "Date Of The Exam"
+  },
+  "VALIDATION_MESSAGES": {
+    "REQUIRED": "{{componentName}} is required",
+    "MAX": "{{componentName}} can not be bigger than {{max}}",
+    "MIN": "{{componentName}} can not be less than {{min}}",
+    "MIN_LENGTH": "{{componentName}}  must be at least {{minLength}} characters",
+    "MAX_LENGTH": "{{componentName}}  must be maximum {{maxLength}} characters",
+    "PATTERN": "{{componentName}} must be only numbers",
+    "EMAIL": "Not a valid email value"
+  }
+}

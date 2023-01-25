@@ -1,0 +1,189 @@
+<div class="container">
+    <form
+      [formGroup]="subjectForm"
+      *ngIf="subjectForm"
+      (ngSubmit)="saveSubject()"
+    >
+    <div class="row">
+      <h2 class="p-4 text-center">{{ "COMMON.FORM" | translate : { componentName: 'Subject'} }}</h2>
+      <div class="col-4">
+        <label for="id" class="col-form-label">{{
+          "SUBJECT.ID" | translate
+        }}</label>
+      </div>
+      <div class="col">
+        <div class="input-group">
+          <input
+            type="number"
+            class="form-control"
+            placeholder="ID"
+            formControlName="id"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="alert alert-danger row" *ngIf="hasErrors('id')">
+      <span *ngIf="hasErrors('id', 'required')">
+        <small>{{ "VALIDATION_MESSAGES.REQUIRED"
+           | translate : 
+            {
+              componentName: 'ID'
+            } }}</small>
+      </span>
+    </div>
+      <div class="row mt-2">
+        <div class="col-4">
+          <label for="name" class="col-form-label">{{
+            "SUBJECT.NAME" | translate
+          }}</label>
+        </div>
+        <div class="col">
+          <div class="input-group">
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Name"
+              formControlName="name"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="alert alert-danger row" *ngIf="hasErrors('name')">
+        <span *ngIf="hasErrors('name', 'required')">
+          <small>{{ "VALIDATION_MESSAGES.REQUIRED" | translate : { componentName: 'Name'} }}</small>
+        </span>
+        <span *ngIf="hasErrors('name', 'minlength')">
+          <small>{{
+            "VALIDATION_MESSAGES.MIN_LENGTH"
+              | translate
+                : {
+                    minLength:
+                      (subjectForm.get("name")?.errors)!["minlength"]['requiredLength'],
+                      componentName: 'Name'
+                  }
+          }}</small>
+        </span>
+        <span *ngIf="hasErrors('name', 'maxlength')">
+          <small>{{
+            "VALIDATION_MESSAGES.MAX_LENGTH"
+              | translate
+                : {
+                    maxLength:
+                      (subjectForm.get("name")?.errors)!["maxlength"]['requiredLength'],
+                      componentName: 'Name'
+                  }
+          }}</small>
+        </span>
+      </div>
+      <div class="row mt-2">
+        <div class="col-4">
+          <label for="description" class="col-form-label">{{
+            "SUBJECT.DESCRIPTION" | translate
+          }}</label>
+        </div>
+        <div class="col">
+            <textarea placeholder="Enter description" class="form-control" name="description" rows="5" formControlName="description"></textarea>
+        </div>
+      </div>
+      <div class="alert alert-danger row" *ngIf="hasErrors('description')">
+        <span *ngIf="hasErrors('description', 'maxlength')">
+          <small>{{ "VALIDATION_MESSAGES.MAX_LENGTH" 
+            | translate : {
+              maxLength: (subjectForm.get("description")?.errors)!["maxlength"]['requiredLength'],
+              componentName: 'Description'
+            } }}</small>
+          </span>
+      </div>
+      <div class="row mt-2">
+        <div class="col-4">
+          <label for="noOfEsp" class="col-form-label">{{
+            "SUBJECT.NO_OF_ESP" | translate
+          }}</label>
+        </div>
+        <div class="col">
+          <input
+            type="number"
+            class="form-control"
+            placeholder="Enter ESP"
+            formControlName="noOfEsp"
+          />
+        </div>
+      </div>
+      <div class="alert alert-danger row" *ngIf="hasErrors('noOfEsp')">
+        <span *ngIf="hasErrors('noOfEsp', 'required')">
+          <small>{{ "VALIDATION_MESSAGES.REQUIRED" 
+            | translate : {
+              componentName: 'No of ESP'
+            } }}</small>
+          </span>
+        <span *ngIf="hasErrors('noOfEsp', 'max')">
+          <small>{{ "VALIDATION_MESSAGES.MAX" 
+            | translate : {
+              max: (subjectForm.get("noOfEsp")?.errors)!["max"]['max'],
+              componentName: 'No of ESP'
+            } }}</small>
+          </span>
+      </div>
+      <div class="row mt-2">
+          <div class="col-4">
+              <label for="yearOfStudy" class="col-form-label">{{
+              "SUBJECT.YEAR_OF_STUDY" | translate
+              }}</label>
+          </div>
+          <div class="col">
+              <input
+                  type="number"
+                  class="form-control"
+                  placeholder="Enter year of study"
+                  formControlName="yearOfStudy"
+              />
+          </div>
+      </div>
+      <div class="alert alert-danger row" *ngIf="hasErrors('yearOfStudy')">
+        <span *ngIf="hasErrors('yearOfStudy', 'required')">
+          <small>{{ "VALIDATION_MESSAGES.REQUIRED" 
+            | translate : {
+              componentName: 'Year of study'
+            } }}</small>
+          </span>
+        <span *ngIf="hasErrors('yearOfStudy', 'max')">
+          <small>{{ "VALIDATION_MESSAGES.MAX" 
+            | translate : {
+              max: (subjectForm.get("yearOfStudy")?.errors)!["max"]['max'],
+              componentName: 'Year of study'
+            } }}</small>
+          </span>
+      </div>
+      <div class="row mt-2">
+          <div class="col-4">
+              <label for="semester" class="col-form-label">{{
+              "SUBJECT.SEMESTER" | translate
+              }}</label>
+          </div>
+          <div class="col">
+            <select formControlName="semester" class="form-select">
+                <option *ngFor="let semester of semesterOptionsAsString" [value]="semester">{{ semester }}</option>
+            </select>
+          </div>
+      </div>
+      <div class="alert alert-danger row" *ngIf="hasErrors('semester')">
+        <span *ngIf="hasErrors('semester', 'required')">
+          <small>{{ "VALIDATION_MESSAGES.REQUIRED" 
+            | translate : {
+              componentName: 'Semester'
+            } }}</small>
+          </span>
+      </div>
+      <div class="row mt-2">
+        <div class="col-md-12 text-center">
+          <button class="btn btn-outline-dark col-sm-2 m-2" type="submit" [disabled]="subjectForm.invalid">
+            {{ "COMMON.SAVE" | translate }}
+          </button>
+          <button class="btn btn-outline-secondary col-sm-2 m-2" (click)="onCancel()">
+            {{ "COMMON.CANCEL" | translate }}
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+  

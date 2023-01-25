@@ -1,0 +1,315 @@
+<div class="container">
+  <form
+    [formGroup]="studentForm"
+    *ngIf="studentForm"
+    (ngSubmit)="saveStudent()"
+  >
+    <div class="row">
+      <h2 class="p-4 text-center">{{ "COMMON.FORM" | translate : { componentName: 'Student'} }}</h2>
+      <div class="col-4">
+        <label for="index" class="col-form-label">{{
+          "STUDENT.INDEX" | translate
+        }}</label>
+      </div>
+      <div class="col">
+        <div class="input-group" formGroupName="index">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Index number"
+            formControlName="indexNumber"
+          />
+          <input
+            type="number"
+            class="form-control"
+            placeholder="Index year"
+            formControlName="indexYear"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="alert alert-danger row" *ngIf="hasErrorsSubGroup('index', 'indexNumber')">
+      <span *ngIf="hasErrorsSubGroup('index', 'indexNumber', 'required')">
+        <small>{{ "VALIDATION_MESSAGES.REQUIRED" | translate : { componentName: 'Index number' } }}</small>
+      </span>
+      <span *ngIf="hasErrorsSubGroup('index', 'indexNumber', 'minlength')">
+        <small>{{
+          "VALIDATION_MESSAGES.MIN_LENGTH"
+            | translate
+              : {
+                  minLength:
+                    (studentForm.get("index")?.get('indexNumber')?.errors)!["minlength"]['requiredLength'],
+                    componentName: 'Index number'
+                }
+        }}</small>
+      </span>
+      <span *ngIf="hasErrorsSubGroup('index', 'indexNumber', 'maxlength')">
+        <small>{{
+          "VALIDATION_MESSAGES.MAX_LENGTH"
+            | translate
+              : {
+                  maxLength:
+                    (studentForm.get("index")?.get('indexNumber')?.errors)!["maxlength"]['requiredLength'],
+                    componentName: 'Index number'
+                }
+        }}</small>
+      </span>
+      <span *ngIf="hasErrorsSubGroup('index', 'indexNumber', 'pattern')">
+        <small>{{
+          "VALIDATION_MESSAGES.PATTERN"
+            | translate: { componentName: 'Index number' }
+        }}</small>
+      </span>
+    </div>
+    <div class="alert alert-danger row" *ngIf="hasErrorsSubGroup('index', 'indexYear')">
+      <span *ngIf="hasErrorsSubGroup('index', 'indexYear', 'required')">
+        <small>{{
+          "VALIDATION_MESSAGES.REQUIRED"
+            | translate
+              : {
+                  min:
+                    (studentForm.get('index')?.get("indexYear")?.errors)!["required"],
+                    componentName: 'Index year'
+                }
+        }}</small>
+      </span>
+      <span *ngIf="hasErrorsSubGroup('index', 'indexYear', 'min')">
+        <small>{{
+          "VALIDATION_MESSAGES.MIN"
+            | translate
+              : {
+                  min:
+                    (studentForm.get('index')?.get("indexYear")?.errors)!["min"]['min'],
+                    componentName: 'Index year'
+                }
+        }}</small>
+      </span>
+      <span *ngIf="hasErrorsSubGroup('index', 'indexYear', 'max')">
+        <small>{{
+          "VALIDATION_MESSAGES.MAX"
+            | translate
+              : {
+                  max:
+                    (studentForm.get('index')?.get("indexYear")?.errors)!["max"]['max'],
+                    componentName: 'Index year'
+                }
+        }}</small>
+      </span>
+    </div>
+    <div class="row mt-2">
+      <div class="col-4">
+        <label for="firstName" class="col-form-label">Username</label>
+      </div>
+      <div class="col">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Enter username"
+          formControlName="username"
+        />
+      </div>
+    </div>
+    <div class="alert alert-danger row" *ngIf="hasErrors('username')">
+      <span *ngIf="hasErrors('username', 'required')">
+        <small>{{ "VALIDATION_MESSAGES.REQUIRED" | translate : { componentName: 'Username' } }}</small>
+      </span>
+    </div>
+    <div class="row mt-2">
+      <div class="col-4">
+        <label for="password" class="col-form-label">Password</label>
+      </div>
+      <div class="col">
+        <input
+          type="password"
+          class="form-control"
+          placeholder="Enter password"
+          formControlName="password"
+        />
+      </div>
+    </div>
+    <div class="alert alert-danger row" *ngIf="hasErrors('password')">
+      <span *ngIf="hasErrors('password', 'required')">
+        <small>{{ "VALIDATION_MESSAGES.REQUIRED" | translate : { componentName: 'Password' } }}</small>
+      </span>
+    </div>
+    <div class="row mt-2">
+      <div class="col-4">
+        <label for="firstName" class="col-form-label">{{
+          "STUDENT.FIRST_NAME" | translate
+        }}</label>
+      </div>
+      <div class="col">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Enter first name"
+          formControlName="firstName"
+        />
+      </div>
+    </div>
+    <div class="alert alert-danger row" *ngIf="hasErrors('firstName')">
+      <span *ngIf="hasErrors('firstName', 'required')">
+        <small>{{ "VALIDATION_MESSAGES.REQUIRED" | translate : { componentName: 'First name' } }}</small>
+      </span>
+      <span *ngIf="hasErrors('firstName', 'minlength')">
+        <small>{{ "VALIDATION_MESSAGES.MIN_LENGTH"
+           | translate : 
+            {
+              minLength: (studentForm.get("firstName")?.errors)!["minlength"]['requiredLength'],
+              componentName: 'First name'
+            } }}</small>
+      </span>
+      <span *ngIf="hasErrors('firstName', 'maxlength')">
+        <small>{{ "VALIDATION_MESSAGES.MAX_LENGTH"
+           | translate : 
+            {
+              maxLength: (studentForm.get("firstName")?.errors)!["maxlength"]['requiredLength'],
+              componentName: 'First name'
+            } }}</small>
+      </span>
+    </div>
+    <div class="row mt-2">
+      <div class="col-4">
+        <label for="LastName" class="col-form-label">{{
+          "STUDENT.LAST_NAME" | translate
+        }}</label>
+      </div>
+      <div class="col">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Enter last name"
+          formControlName="lastName"
+        />
+      </div>
+    </div>
+    <div class="alert alert-danger row" *ngIf="hasErrors('lastName')">
+      <span *ngIf="hasErrors('lastName', 'required')">
+        <small>{{ "VALIDATION_MESSAGES.REQUIRED" | translate : { componentName: 'Last name' } }}</small>
+      </span>
+      <span *ngIf="hasErrors('lastName', 'minlength')">
+        <small>{{ "VALIDATION_MESSAGES.MIN_LENGTH"
+           | translate : 
+            {
+              minLength: (studentForm.get("lastName")?.errors)!["minlength"]['requiredLength'],
+              componentName: 'Last name'
+            } }}</small>
+      </span>
+      <span *ngIf="hasErrors('lastName', 'maxlength')">
+        <small>{{ "VALIDATION_MESSAGES.MAX_LENGTH"
+           | translate : 
+            {
+              maxLength: (studentForm.get("lastName")?.errors)!["maxlength"]['requiredLength'],
+              componentName: 'Last name'
+            } }}</small>
+      </span>
+    </div>
+      <div class="row mt-2">
+        <div class="col-4">
+            <label for="email" class="col-form-label">{{
+            "STUDENT.EMAIL" | translate
+            }}</label>
+        </div>
+        <div class="col">
+            <input
+                type="email"
+                class="form-control"
+                placeholder="Enter email name"
+                formControlName="email"
+            />
+        </div>
+      </div>
+      <div class="alert alert-danger row" *ngIf="hasErrors('email')">
+        <span>
+          <small>{{ "VALIDATION_MESSAGES.EMAIL" | translate }}</small>
+        </span>
+        <span *ngIf="hasErrors('email', 'maxlength')">
+          <small>{{ "VALIDATION_MESSAGES.MAX_LENGTH"
+             | translate : 
+              {
+                maxLength: (studentForm.get("email")?.errors)!["maxlength"]['requiredLength'],
+                componentName: 'Email'
+              } }}</small>
+        </span>
+      </div>
+    <div class="row mt-2">
+        <div class="col-4">
+            <label for="address" class="col-form-label">{{
+            "STUDENT.ADDRESS" | translate
+            }}</label>
+        </div>
+        <div class="col">
+            <input
+                type="text"
+                class="form-control"
+                placeholder="Enter address"
+                formControlName="address"
+            />
+        </div>
+    </div>
+    <div class="alert alert-danger row" *ngIf="hasErrors('address')">
+      <span *ngIf="hasErrors('address', 'minlength')">
+        <small>{{ "VALIDATION_MESSAGES.MIN_LENGTH"
+           | translate : 
+            {
+              minLength: (studentForm.get("address")?.errors)!["minlength"]['requiredLength'],
+              componentName: 'Address'
+            } }}</small>
+      </span>
+      <span *ngIf="hasErrors('address', 'maxlength')">
+        <small>{{ "VALIDATION_MESSAGES.MAX_LENGTH"
+           | translate : 
+            {
+              maxLength: (studentForm.get("address")?.errors)!["maxlength"]['requiredLength'],
+              componentName: 'Address'
+            } }}</small>
+      </span>
+    </div>
+    <div class="row mt-2">
+        <div class="col-4">
+            <label for="city" class="col-form-label">{{
+            "STUDENT.CITY" | translate
+            }}</label>
+        </div>
+        <div class="col">
+          <select class="form-select" formControlName="city" [compareWith]="compareCity">
+            <option *ngFor="let city of cities" [ngValue]="city">{{city.name}}</option>
+          </select>
+        </div>
+    </div>
+    <div class="row mt-2">
+        <div class="col-7">
+            <label for="currentYearOfStudy" class="col-form-label">{{
+            "STUDENT.CURRENT_YEAR_OF_STUDY" | translate
+            }}</label>
+        </div>
+        <div class="col">
+            <input
+                type="number"
+                class="form-control"
+                placeholder="Enter year"
+                formControlName="currentYearOfStudy"
+            />
+        </div>
+    </div>
+    <div class="alert alert-danger row" *ngIf="hasErrors('currentYearOfStudy')">
+      <span *ngIf="hasErrors('currentYearOfStudy', 'required')">
+        <small>{{ "VALIDATION_MESSAGES.REQUIRED"
+           | translate : 
+            {
+              componentName: 'Current year of study'
+            } }}</small>
+      </span>
+    </div>
+    <div class="row mt-2">
+      <div class="col-md-12 text-center">
+        <button class="btn btn-outline-dark col-sm-2 m-2" type="submit" [disabled]="studentForm.invalid">
+          {{ "COMMON.SAVE" | translate }}
+        </button>
+        <button class="btn btn-outline-secondary col-sm-2 m-2" (click)="onCancel()">
+          {{ "COMMON.CANCEL" | translate }}
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

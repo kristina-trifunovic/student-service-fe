@@ -1,0 +1,201 @@
+<ng-template #modal let-modal>
+    <div class="modal-header d-flex justify-content-between">
+        <label for="subject">{{ subject?.name }}</label>
+        <button type="button" class="btn-close" (click)="modal.dismiss()"></button>
+    </div>
+    <div class="modal-body">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <form enctype="multipart/form-data">
+                        <input type="file" (change)="onUploadLiterature($event)" name="file" class="form-control">
+                    </form>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col text-center">
+                    <button class="btn btn-outline-secondary mt-2" (click)="uploadLiteratureToSubject()" (click)="modal.dismiss()" [disabled]="literature === undefined">{{ 'COMMON.UPLOAD' | translate }}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+    </div>
+</ng-template>
+
+
+<section>
+    <div class="container py-5">
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="card mb-4">
+                    <div class="card-body text-center">
+                        <img src="assets\pictures\profile-pic.png" alt="avatar"
+                        class="rounded-circle img-fluid small">
+                        <h5 class="my-3">{{ user?.firstName + ' ' + user?.lastName }}</h5>
+                        <p class="text-muted mb-2">{{ user?.city?.name }}</p>
+                        <p class="text-muted mb-1">{{ user?.email }}</p>
+                    </div>
+                </div>
+                <div class="card mb-4 mb-md-0">
+                    <div class="card-body child-font">
+                        <p class="mb-4"><span class="text-primary">Skill set</span></p>
+                        <p class="mb-1">Web Design</p>
+                        <div class="progress rounded my-height">
+                            <div class="progress-bar" role="progressbar" style="width: 80%" aria-valuenow="80"
+                                aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        <p class="mt-4 mb-1">Website Markup</p>
+                        <div class="progress rounded my-height">
+                            <div class="progress-bar" role="progressbar" style="width: 72%" aria-valuenow="72"
+                                aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        <p class="mt-4 mb-1">One Page</p>
+                        <div class="progress rounded my-height">
+                            <div class="progress-bar" role="progressbar" style="width: 89%" aria-valuenow="89"
+                                aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        <p class="mt-4 mb-1">Mobile Template</p>
+                        <div class="progress rounded my-height">
+                            <div class="progress-bar" role="progressbar" style="width: 55%" aria-valuenow="55"
+                                aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        <p class="mt-4 mb-1">Backend API</p>
+                        <div class="progress rounded mb-2 my-height">
+                            <div class="progress-bar" role="progressbar" style="width: 66%" aria-valuenow="66"
+                                aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-8">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <div *ngIf="student">
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <p class="mb-0">{{ 'STUDENT.INDEX' | translate }}</p>
+                                </div>
+                                <div class="col-sm-9">
+                                    <p class="text-muted mb-0">{{ student.index.indexNumber + '/' + student.index.indexYear }}</p>
+                                </div>
+                            </div>
+                            <hr>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0">{{ 'USER.FULL_NAME' | translate }}</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <p class="text-muted mb-0">{{ user?.firstName + ' ' + user?.lastName}}</p>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0">{{ 'USER.EMAIL' | translate }}</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <p class="text-muted mb-0">{{ user?.email }}</p>
+                            </div>
+                        </div>                        
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0">{{ 'USER.ADDRESS' | translate }}</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <p class="text-muted mb-0">{{ user?.address + ', ' + user?.city?.name + ', Serbia' }}</p>
+                            </div>
+                        </div>
+                        <div *ngIf="professor">
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <p class="mb-0"> {{ 'PROFESSOR.PHONE' | translate }}</p>
+                                </div>
+                                <div class="col-sm-9">
+                                    <p class="text-muted mb-0">{{ professor.phone }}</p>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <p class="mb-0"> {{ 'PROFESSOR.REELECTION_DATE' | translate }}</p>
+                                </div>
+                                <div class="col-sm-9">
+                                    <p class="text-muted mb-0">{{ professor.reelectionDate }}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div *ngIf="student">
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <p class="mb-0">{{ 'STUDENT.CURRENT_YEAR_OF_STUDY' | translate }}</p>
+                                </div>
+                                <div class="col-sm-9">
+                                    <p class="text-muted mb-0">{{ student.currentYearOfStudy }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card mb-4" *ngIf="student">
+                    <div class="card-body">
+                        <table class="table table-hover" >                            
+                            <thead>
+                                <th scope="col">#</th>
+                                <th scope="col">{{ 'EXAM.SUBJECT' | translate }}</th>
+                                <th scope="col">{{ 'EXAM.EXAM_PERIOD' | translate}}</th>
+                                <th scope="col">{{ 'EXAM.EXAM_DATE' | translate }}</th>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let exam of student.exams; let i = index">
+                                    <th scope="row">{{ i + 1 }}</th>
+                                    <td>{{ exam.subject.name }}</td>
+                                    <td>{{ exam.examPeriod.name }}</td>
+                                    <td>{{ exam.examDate }}</td>
+                                </tr>
+                            </tbody>
+                            <caption>List of applied exams</caption>
+                        </table>
+                    </div>
+                </div>
+                <div class="card mb-4" *ngIf="professor">
+                    <div class="card-body">
+                        <table class="table table-hover">                            
+                            <thead>
+                                <th scope="col">#</th>
+                                <th>{{ 'SUBJECT.NAME' | translate }}</th>
+                                <th>{{ 'SUBJECT.YEAR_OF_STUDY' | translate }}</th>
+                                <th>{{ 'SUBJECT.NO_OF_ESP' | translate }}</th>
+                                <th>{{ 'SUBJECT.SEMESTER' | translate }}</th>
+                                <th>{{ 'COMMON.ADD_LITERATURE' | translate }}</th>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let subject of professor.subjects; let i = index">
+                                    <th scope="row">{{ i + 1 }}</th>
+                                    <td>{{ subject.name }}</td>
+                                    <td>{{ subject.yearOfStudy }}</td>
+                                    <td>{{ subject.noOfEsp }}</td>
+                                    <td>{{ subject.semester }}</td>
+                                    <td>
+                                        <button class="btn btn-outline-secondary" (click)="openAddLiterature(modal, subject)"><bi name="book"></bi></button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <caption>List of subjects</caption>
+                        </table>
+                    </div>
+                </div>
+                <div class="card mb-4 text-center" *ngIf="isAdmin">
+                    <div class="card-body">
+                        <img src="assets/pictures/chart.png"  alt="graph">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<router-outlet></router-outlet>

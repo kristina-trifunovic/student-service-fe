@@ -1,0 +1,15 @@
+section {
+    background-color: #eee;
+}
+
+.small {
+    width: 150px;
+}
+
+.my-height {
+    height: 5px;
+}
+
+.child-font > p {
+    font-size: .77rem;
+}

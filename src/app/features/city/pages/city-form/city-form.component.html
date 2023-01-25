@@ -1,0 +1,83 @@
+<div class="row justify-content-center min-width">
+  <div class="col-auto">
+    <form [formGroup]="cityForm" *ngIf="cityForm" (ngSubmit)="saveCity()">
+        <div class="container">
+            <h2 class="p-4 text-center">{{ "COMMON.FORM" | translate : { componentName: 'City'} }}</h2>
+            <div class="row">
+                <div class="col-4">
+                    <label for="postalCode" class="col-form-label">{{
+                    "CITY.POSTAL_CODE" | translate
+                    }}</label>
+                </div>
+                <div class="col">
+                    <input
+                        type="number"
+                        class="form-control"
+                        placeholder="Enter postal code"
+                        formControlName="postalCode"
+                    />
+                </div>
+            </div>
+            <div class="alert alert-danger row" *ngIf="hasErrors('postalCode')">
+                <span *ngIf="hasErrors('postalCode', 'required')">
+                    <small>{{ "VALIDATION_MESSAGES.REQUIRED" | translate : {componentName: 'Postal code'} }}</small>
+                </span>
+                <span *ngIf="hasErrors('postalCode', 'min')">
+                    <small>{{
+                    "VALIDATION_MESSAGES.MIN"
+                        | translate
+                        : { 
+                            min: (cityForm.get("postalCode")?.errors)!["min"]["min"],
+                            componentName: 'Postal code'
+                        }
+                    }}</small>
+                </span>
+                <span *ngIf="hasErrors('postalCode', 'max')">
+                    <small>{{
+                    "VALIDATION_MESSAGES.MAX"
+                        | translate
+                        : { max: (cityForm.get("postalCode")?.errors)!["max"]["max"], componentName: 'Postal code' }
+                    }}</small>
+                </span>
+            </div>
+            <div class="row mt-2">
+                <div class="col-4">
+                    <label for="name" class="col-form-label">{{
+                    "CITY.NAME" | translate
+                    }}</label>
+                </div>
+                <div class="col">
+                    <input
+                        type="text"
+                        class="form-control"
+                        placeholder="Enter name"
+                        formControlName="name"
+                    />
+                </div>
+            </div>
+            <div class="alert alert-danger row" *ngIf="hasErrors('name')">
+                <span *ngIf="hasErrors('name', 'required')">
+                    <small>{{ "VALIDATION_MESSAGES.REQUIRED" | translate: { componentName: 'Name'} }}</small>
+                </span>
+                <span *ngIf="hasErrors('name', 'minlength')">
+                    <small>{{
+                    "VALIDATION_MESSAGES.MIN_LENGTH"
+                        | translate: {minLength: cityForm.get('name')?.errors!['minlength']['requiredLength'], componentName: 'Name'}
+                    }}</small>
+                </span>
+            </div>
+            <div class="row mt-2">
+                <button class="btn btn-outline-dark col-sm-4 m-2" type="submit" [disabled]="cityForm.invalid">
+                  {{ "COMMON.SAVE" | translate }}
+                </button>
+                <button
+                  class="btn btn-outline-secondary col-sm-4 m-2"
+                  (click)="onCancel()"
+                >
+                  {{ "COMMON.CANCEL" | translate }}
+                </button>
+            </div>
+        </div>
+    </form>
+  </div>
+</div>

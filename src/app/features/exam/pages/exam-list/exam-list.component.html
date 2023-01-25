@@ -1,0 +1,101 @@
+
+<ng-template #details let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Exam details</h4>
+      <button type="button" class="btn-close" (click)="modal.dismiss()"></button>
+    </div>
+    <div class="modal-body">
+        <div class="container">
+            <div class="row">
+                <div class="col-3">
+                    <label for="subject" class="col-form-label">{{ 'EXAM.SUBJECT' | translate }}</label>
+                </div>
+                <div class="col">
+                    <input type="text" class="form-control" readonly value="{{examToShow!.subject.name}}">
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-4">
+                    <label for="examDate" class="col-form-label">{{ 'EXAM.EXAM_DATE' | translate }}</label>
+                </div>
+                <div class="col">
+                    <input type="text" class="form-control" readonly value="{{examToShow!.examDate}}">
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-3">
+                    <label for="examPeriod" class="col-form-label">{{ 'EXAM.EXAM_PERIOD' | translate }}</label>
+                </div>
+                <div class="col">
+                    <input type="text" class="form-control" readonly [value]="examToShow!.examPeriod.name">
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-3">
+                    <label for="professor" class="col-form-label">{{ 'EXAM.PROFESSOR' | translate }}</label>
+                </div>
+                <div class="col">
+                    <input type="text" class="form-control" readonly [value]="examToShow!.professor.firstName + ' ' + examToShow!.professor.lastName">
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-3">
+                    <label for="grade" class="col-form-label">{{ 'EXAM.GRADE' | translate }}</label>
+                </div>
+                <div class="col">
+                    <input type="number" class="form-control" [value]="examToShow!.grade" #grade>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="updateExam(examToShow!, modal, grade.value)" [disabled]="examToShow?.professor?.username !== userLoginData.userLoggedIn?.username">Add grade</button>
+    </div>
+</ng-template>
+
+<div class="row justify-content-center mx-auto">
+    <h2 class="p-4 text-center">{{ "COMMON.LIST" | translate : { componentName: 'Exam'} }}</h2>
+    <div class="col-6">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">{{ 'EXAM.SUBJECT' | translate }}</th>
+                    <th scope="col">{{ 'EXAM.EXAM_DATE' | translate }}</th>
+                    <th scope="col">{{ 'EXAM.EXAM_PERIOD' | translate }}</th>
+                    <th scope="col">{{ 'EXAM.PROFESSOR' | translate }}</th>
+                    <th scope="col">{{ 'COMMON.ACTIONS' | translate }}</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let exam of exams">
+                    <td>{{ exam.subject.name }}</td>
+                    <td>{{ exam.examDate }}</td>
+                    <td>{{ exam.examPeriod.name }}</td>
+                    <td>{{ exam.professor.firstName + ' ' + exam.professor.lastName }}</td>
+                    <td class="d-flex flex-nowrap">
+                        <button class="btn btn-outline-secondary m-1" (click)="openDetails(details, exam)">{{ 'COMMON.DETAILS' | translate }}</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="d-flex flex-column justify-content-center align-items-center">
+    <ngb-pagination
+          [pageSize]="pageInfo.pageSize"
+          [collectionSize]="pageInfo.totalItems"
+          [(page)]="pageInfo.pageNo"
+          (pageChange)="onPageChange()"
+          [boundaryLinks]="true"
+          aria-label="Default pagination">
+    </ngb-pagination>
+    <div class="d-flex justify-content-center align-items-center">
+        <label for="pageSize">Show</label>
+        <select class="form-select small mx-2 col-2"
+        (change)="onPageSizeChange()"
+        [(ngModel)]="pageInfo.pageSize" >
+        <option *ngFor="let size of availablePageSizes" [ngValue]="size">{{size}}</option>
+        </select>
+        <label for="pageSize">per page</label>
+    </div>
+  </div>
