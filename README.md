@@ -8,4 +8,7 @@ Run `ng serve`. Navigate to `http://localhost:4200/`. The application will autom
 
 ## Further help
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+To use FE and BE (full experience), start BE (explained in student-service-be repository) and then FE.
+Admin credentials: username: admin, password: admin
+Professor credentials: username: kika, password: kika
+Student credentials: username: nikolina, password: niki
